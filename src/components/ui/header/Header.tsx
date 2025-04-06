@@ -3,6 +3,7 @@
 import { MENU } from "@/lib/constants";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { Link } from "@nextui-org/link";
 import {
   Navbar,
@@ -43,14 +44,34 @@ const Header = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {MENU.slice(0, 4).map((item) => (
           <NavbarItem key={item.route}>
-            <Link
-              className={cn("text-white", {
-                "text-primary-100": isActive(item.route),
-              })}
-              href={item.route}
-            >
-              {item.value}
-            </Link>
+            {item.value === "Find events" ? (
+              <Dropdown>
+                <DropdownTrigger className=" cursor-pointer">
+                  <Link
+                    className={cn("text-white", {
+                      "text-primary-100": isActive(item.route),
+                    })}
+                  >
+                    Find events
+                  </Link>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem as={Link} color="primary" className="text-black"  href="/events">All events</DropdownItem>
+                  <DropdownItem as={Link} color="primary" className="text-black" href="/events/trending">Trending events</DropdownItem>
+                  <DropdownItem as={Link} color="primary" className="text-black" href="/events/physical">Physical events</DropdownItem>
+                  <DropdownItem as={Link} color="primary" className="text-black" href="/events/virtual">Virtual events</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Link
+                className={cn("text-white", {
+                  "text-primary-100": isActive(item.route),
+                })}
+                href={item.route}
+              >
+                {item.value}
+              </Link>
+            )}
           </NavbarItem>
         ))}
       </NavbarContent>

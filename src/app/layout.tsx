@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 
 // Get the configuration object
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Providers } from "./Providers";
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -40,7 +41,9 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
